@@ -1,0 +1,99 @@
+﻿<Window x:Class="DrawingWithTutorial.MainWindow" x:Name="myMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DrawingWithTutorial"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Drawing" Height="600" Width="800"
+        MinHeight="600" MinWidth="800" SizeToContent="WidthAndHeight" KeyDown="Window_KeyDown">
+    <DockPanel>
+        <Grid>
+</Grid>
+        <Menu x:Name="Menu" DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem x:Name="menuNew" Header="New" Click="menuNew_Click"/>
+                <MenuItem x:Name="menuOpen" Header="Open" Click="menuOpen_Click"/>
+                <MenuItem x:Name="menuSave" Header="Save" Click="menuSave_Click"/>
+            </MenuItem>
+
+            <MenuItem Header="Help">
+                <MenuItem x:Name="menuTutorial" Header="Tutorial" Click="tutorial_Click"/>
+            </MenuItem>
+
+            <MenuItem x:Name="pencil" Width="26" Click="pencil_Click">
+                <MenuItem.Icon>
+                    <Image Source="Images/pencil.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem x:Name="brushSize" Width="26" Click="brushSize_Click">
+                <MenuItem.Icon>
+                    <Image Source="Images/smaller.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem x:Name="ellipse" Width="26" Click="ellipse_Click">
+                <MenuItem.Icon>
+                    <Image Source="Images/ellipse.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem x:Name="rectangle" Width="26" Click="square_Click">
+                <MenuItem.Icon>
+                    <Image Source="Images/square.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem x:Name="text" Width="26" Click="text_Click">
+                <MenuItem.Icon>
+                    <Image Source="Images/Letter.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem x:Name="colorBlack" Width="26" Click="colorBlack_Click">
+                <MenuItem.Icon>
+                    <Image Source="Images/black.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem x:Name="colorGrey" Width="26" Click="colorGrey_Click">
+                <MenuItem.Icon>
+                    <Image Source="Images/gray.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem x:Name="colorWhite" Width="26" Click="colorWhite_Click">
+                <MenuItem.Icon>
+                    <Image Source="Images/white.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem x:Name="colorRed" Width="26" Click="colorRed_Click">
+                <MenuItem.Icon>
+                    <Image Source="Images/red.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem x:Name="colorBlue" Width="26" Click="colorBlue_Click">
+                <MenuItem.Icon>
+                    <Image Source="Images/blue.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem x:Name="colorYellow" Width="26" Click="colorYellow_Click">
+                <MenuItem.Icon>
+                    <Image Source="Images/yellow.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+        </Menu>
+        
+        <Grid Name="MainGrid" SizeChanged="MainGrid_SizeChanged">
+            <Grid.LayoutTransform>
+                <ScaleTransform x:Name="ApplicationScaleTransform"
+                        CenterX="0"
+                        CenterY="0"
+                                
+                        ScaleX="{Binding ElementName=myMainWindow, Path=ScaleValue}"
+                        ScaleY="{Binding ElementName=myMainWindow, Path=ScaleValue}" />
+            </Grid.LayoutTransform>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Canvas x:Name="canvas" MouseLeftButtonDown="Canvas_MouseLeftButtonDown" MouseMove="Canvas_MouseMove" Background="Transparent" IsHitTestVisible="False" Cursor="Pen" Grid.ColumnSpan="2" Margin="0,10,0,0"/>
+        </Grid>
+    </DockPanel>
+</Window>
+    
