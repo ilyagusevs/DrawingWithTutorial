@@ -10,8 +10,6 @@ using System.Windows.Shapes;
 
 namespace DrawingWithTutorial
 {
-    /// Notepad and Paint app in one. Also includes a pop up window for a calculator and a language switch.
-
     public partial class MainWindow : Window
     {
         public string strokeColor = "black";
@@ -26,6 +24,7 @@ namespace DrawingWithTutorial
         Point currentPoint = new Point();
         public Ellipse elip = new Ellipse();
         public Rectangle rec = new Rectangle();
+
 
         string messageBoxText = "Do you want to save changes?";
         string captionNew = "New File";
@@ -46,6 +45,9 @@ namespace DrawingWithTutorial
             {
                 SaveFile();
             }
+
+           
+          
         }
 
         private void menuNew_Click(object sender, RoutedEventArgs e)
@@ -66,7 +68,6 @@ namespace DrawingWithTutorial
 
         private void Canvas_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            // Drawing on canvas. Checks if Ellipse is checked on and creates an ellipse. If not then only gets the mouse position. 
             if (!isEllipse && !isRectangle)
             {
                 if (e.ButtonState == MouseButtonState.Pressed)
@@ -104,10 +105,20 @@ namespace DrawingWithTutorial
             TogglePen();
         }
 
+        void Erase()
+        {
+            canvas.Children.Clear();
+           
+        }
+
+        void erase_Click(object sender, RoutedEventArgs e)
+        {
+            Erase();
+        }
+
 
         private void brushSize_Click(object sender, RoutedEventArgs e)
         {
-            // switch case to rotate between three brush sizes. Default is case 1. 
             switch (caseSwitch)
             {
                 case 1:
@@ -193,17 +204,13 @@ namespace DrawingWithTutorial
 
         private void text_Click(object sender, RoutedEventArgs e)
         {
-            //TextBox tb = new TextBox
-            //{
-            //    Width = 100,
-            //    Height = 50,
-            //    BorderThickness = new Thickness(1),
-            //    BorderBrush = new SolidColorBrush(Color.FromRgb(5, 5, 5)),
-            //    Margin = new Thickness(20, 20, 0, 0),
-            //    Focusable = true,
-            //};
-            //this.canvas.Children.Add(tb);
-            //tb.Focus();
+            TextBox tb = new TextBox
+            {
+                Width = 100,
+                Height = 50,
+            };
+            this.canvas.Children.Add(tb);
+            tb.Focus();
 
         }
 

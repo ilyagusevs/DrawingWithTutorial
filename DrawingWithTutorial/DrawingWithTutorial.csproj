@@ -117,7 +117,6 @@
     <Resource Include="Images\blue.png" />
     <Resource Include="Images\ellipse.png" />
     <Resource Include="Images\gray.png" />
-    <Resource Include="Images\pen-icon2.png" />
     <Resource Include="Images\red.png" />
     <Resource Include="Images\small.png" />
     <Resource Include="Images\smaller.png" />
@@ -146,6 +145,7 @@
     <Resource Include="TutorImages\Stop.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\trash.png" />
     <Content Include="Media\test.mp4" />
     <Resource Include="TutorImages\start.png" />
     <Resource Include="TutorImages\backTo.png" />
