@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>download_YCk_icon.ico</ApplicationIcon>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -134,7 +134,22 @@
     <Resource Include="Images\Letter.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="download_YCk_icon.ico" />
+    <Resource Include="icon.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="TutorImages\back.png" />
+    <Resource Include="TutorImages\forward.png" />
+    <Resource Include="TutorImages\pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="TutorImages\Play.png" />
+    <Resource Include="TutorImages\Stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Media\test.mp4" />
+    <Resource Include="TutorImages\start.png" />
+    <Resource Include="TutorImages\backTo.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
