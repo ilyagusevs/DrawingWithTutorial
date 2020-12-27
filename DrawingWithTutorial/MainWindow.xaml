@@ -21,7 +21,12 @@
                     <Image Source="Images/pencil.png"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem x:Name="erase" Header="Erase" Width="26" Click="erase_Click">
+            <MenuItem x:Name="fill" Width="26" Click="fill_Click">
+                <MenuItem.Icon>
+                    <Image Source="Images/bucket.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem x:Name="clear" Width="26" Click="clear_Click">
                 <MenuItem.Icon>
                     <Image Source="Images/trash.png"/>
                 </MenuItem.Icon>
