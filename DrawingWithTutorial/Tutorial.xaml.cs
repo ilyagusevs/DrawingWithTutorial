@@ -42,9 +42,12 @@ namespace DrawingWithTutorial
 
         private void Play_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            mePlayer.Source = new Uri(@"C:\Users\Илья\Desktop\Programming\C#\test.mp4", UriKind.Absolute);   
+            mePlayer.Source = new Uri(@"C:\Users\Илья\Desktop\Programming\C#\test.mp4", UriKind.Absolute);
             mePlayer.Play();
             mediaPlayerIsPlaying = true;
+            mePlayer.Width = 800;
+            mePlayer.Height = 600;
+
         }
 
         private void play_Click(object sender, RoutedEventArgs e)
@@ -147,6 +150,7 @@ namespace DrawingWithTutorial
             MainWindow objWindow1 = new MainWindow();
             this.Visibility = Visibility.Hidden; // lai nebūtu atverti divi logi vienlaicīgi
             objWindow1.Show();
+            mePlayer.Stop();
         }
 
         private void lblProgressStatus_MouseLeave(object sender, MouseEventArgs e)

@@ -124,9 +124,6 @@
     <Resource Include="Images\yellow.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\pencil.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\square.png" />
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +143,8 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\trash.png" />
+    <Resource Include="Images\bucket.png" />
+    <Resource Include="Images\pencil.png" />
     <Content Include="Media\test.mp4" />
     <Resource Include="TutorImages\start.png" />
     <Resource Include="TutorImages\backTo.png" />
