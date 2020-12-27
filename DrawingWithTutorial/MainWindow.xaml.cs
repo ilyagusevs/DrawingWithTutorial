@@ -13,10 +13,11 @@ namespace DrawingWithTutorial
     public partial class MainWindow : Window
     {
         public string strokeColor = "black";
+        public string fillColor = "transparent";
         public string filePath;
 
         public int strokeSize = 2;
-        public int caseSwitch = 2;
+        public int brushSwitch = 2;
         public bool isHighlighted = false;
         public bool isEllipse = false;
         public bool isRectangle = false;
@@ -25,13 +26,11 @@ namespace DrawingWithTutorial
         public Ellipse elip = new Ellipse();
         public Rectangle rec = new Rectangle();
 
-
         string messageBoxText = "Do you want to save changes?";
         string captionNew = "New File";
         string captionOpen = "Open File";
         MessageBoxButton button = MessageBoxButton.YesNoCancel;
         MessageBoxImage icon = MessageBoxImage.Warning;
-
 
         public MainWindow()
         {
@@ -47,7 +46,6 @@ namespace DrawingWithTutorial
             }
 
            
-          
         }
 
         private void menuNew_Click(object sender, RoutedEventArgs e)
@@ -93,34 +91,41 @@ namespace DrawingWithTutorial
                     Stroke = brush,
                     StrokeThickness = strokeSize
                 };
-    
+
                 canvas.Children.Add(elip);
                 canvas.Children.Add(rec);
             }
         }
-      
+
         void pencil_Click(object sender, RoutedEventArgs e)
         {
             HighlightMenu(sender);
             TogglePen();
         }
 
-        void Erase()
+        void fill_Click(object sender, RoutedEventArgs e)
         {
-            canvas.Children.Clear();
-           
+            fillCanvas();
         }
 
-        void erase_Click(object sender, RoutedEventArgs e)
+        void Clear()
         {
-            Erase();
+            //Cleans entire canvas
+            canvas.Children.Clear();
+            canvas.Background = new SolidColorBrush(Colors.Transparent);
+        }
+
+        void clear_Click(object sender, RoutedEventArgs e)
+        {
+            Clear();
         }
 
 
         private void brushSize_Click(object sender, RoutedEventArgs e)
         {
-            switch (caseSwitch)
+            switch (brushSwitch)
             {
+                //Cases with brush sizes. For each stroke size changes brush size icon 
                 case 1:
 
                     brushSize.Icon = new System.Windows.Controls.Image
@@ -128,7 +133,7 @@ namespace DrawingWithTutorial
                         Source = new BitmapImage(new Uri("Images/smaller.png", UriKind.Relative))
                     };
                     strokeSize = 2;
-                    caseSwitch += 1;
+                    brushSwitch += 1;
                     break;
 
                 case 2:
@@ -138,7 +143,7 @@ namespace DrawingWithTutorial
                         Source = new BitmapImage(new Uri("Images/small.png", UriKind.Relative))
                     };
                     strokeSize = 6;
-                    caseSwitch += 1;
+                    brushSwitch += 1;
                     break;
 
                 case 3:
@@ -148,48 +153,96 @@ namespace DrawingWithTutorial
                         Source = new BitmapImage(new Uri("Images/big.png", UriKind.Relative))
                     };
                     strokeSize = 12;
-                    caseSwitch = 1;
+                    brushSwitch = 1;
                     break;
             }
 
         }
 
+        private void fillCanvas()
+        {
+            switch (fillColor)
+            {
+                case "white":
+                    canvas.Background = new SolidColorBrush(Colors.White);
+                    break;
+
+                case "black":
+                    canvas.Background = new SolidColorBrush(Colors.Black);
+                    break;
+
+                case "gray":
+                    canvas.Background = new SolidColorBrush(Colors.Gray);
+                    break;
+
+                case "red":
+                    canvas.Background = new SolidColorBrush(Colors.Red);
+                    break;
+
+                case "yellow":
+                    canvas.Background = new SolidColorBrush(Colors.Yellow);
+                    break;
+
+                case "blue":
+                    canvas.Background = new SolidColorBrush(Colors.Blue);
+                    break;
+                default:
+                    canvas.Background = new SolidColorBrush(Colors.Transparent);
+                    break;
+            }
+        }
+
+
+        #region Colors
+
+        //All color definitions
         private void colorBlack_Click(object sender, RoutedEventArgs e)
         {
             ColorHighlight(sender);
             strokeColor = "black";
+            fillColor = "black";
+
         }
 
         private void colorGrey_Click(object sender, RoutedEventArgs e)
         {
             ColorHighlight(sender);
             strokeColor = "gray";
+            fillColor = "gray";
         }
 
         private void colorWhite_Click(object sender, RoutedEventArgs e)
         {
             ColorHighlight(sender);
             strokeColor = "white";
+            fillColor = "white";
         }
 
         private void colorRed_Click(object sender, RoutedEventArgs e)
         {
             ColorHighlight(sender);
             strokeColor = "red";
+            fillColor = "red";
         }
 
         private void colorBlue_Click(object sender, RoutedEventArgs e)
         {
             ColorHighlight(sender);
             strokeColor = "blue";
+            fillColor = "blue";
         }
 
         private void colorYellow_Click(object sender, RoutedEventArgs e)
         {
             ColorHighlight(sender);
             strokeColor = "yellow";
+            fillColor = "yellow";
         }
 
+        #endregion
+
+
+        #region Shapes and text
         private void ellipse_Click(object sender, RoutedEventArgs e)
         {
             HighlightShape(sender);
@@ -204,21 +257,24 @@ namespace DrawingWithTutorial
 
         private void text_Click(object sender, RoutedEventArgs e)
         {
-            TextBox tb = new TextBox
-            {
-                Width = 100,
-                Height = 50,
-            };
-            this.canvas.Children.Add(tb);
-            tb.Focus();
+            ////Adds text box to canvas with defined width and height
+            //TextBox tb = new TextBox
+            //{
+            //    Width = 100
+            //    Height = 50,
+            //};
+            //this.canvas.Children.Add(tb);
+            //tb.Focus();
 
         }
+
+        #endregion
 
         private void Canvas_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (!isEllipse && !isRectangle)
             {
-                // If Ellipse is not on then simply draws a line on canvas where the users mouse is. 
+                // If ellipse or rectangle are not selected then draws with a line on canvas by following a mouse 
                 if (e.LeftButton == MouseButtonState.Pressed)
                 {
                     Line line = new Line();
@@ -237,9 +293,9 @@ namespace DrawingWithTutorial
                     canvas.Children.Add(line);
                 }
             }
-            else if(isEllipse)
+            else if (isEllipse)
             {
-                // If Ellipse is on this draws an ellipse where user is moving his mouse. 
+                // If ellipse is selected draws an ellipse on canvas by following a mouse 
                 if (e.LeftButton == MouseButtonState.Pressed)
                 {
 
@@ -261,9 +317,10 @@ namespace DrawingWithTutorial
             }
             else if (isRectangle)
             {
+                // If rectangle is selected draws a rectangle on canvas by following a mouse
                 if (e.LeftButton == MouseButtonState.Pressed)
                 {
-                    
+
                     double minX = Math.Min(e.GetPosition(canvas).X, currentPoint.X);
                     double minY = Math.Min(e.GetPosition(canvas).Y, currentPoint.Y);
                     double maxX = Math.Max(e.GetPosition(canvas).X, currentPoint.X);
@@ -277,14 +334,15 @@ namespace DrawingWithTutorial
 
                     rec.Height = Math.Abs(height);
                     rec.Width = Math.Abs(width);
-                    
+
                 }
             }
+
         }
 
         public void TogglePen()
         {
-            // Uses the isHitTestVisible property of canvas to toggle drawing on and off
+            //Property IsHitTestVisible tells if pen toggle is on(true) or off(false)
 
             if (canvas.IsHitTestVisible == false)
             {
@@ -296,6 +354,8 @@ namespace DrawingWithTutorial
             }
         }
 
+        #region Message boxes, save file and open file
+
         public void OpenFileMessageBox()
         {
             MessageBoxResult result = MessageBox.Show(messageBoxText, captionOpen, button, icon);
@@ -303,6 +363,10 @@ namespace DrawingWithTutorial
             // Process message box results
             switch (result)
             {
+                /*Before file will be opened program offers to save the existing file(Yes)
+                or just open new file without saving(No),
+                option 'cancel' closes message box */
+
                 case MessageBoxResult.Yes:
                     SaveFile();
                     OpenFile();
@@ -322,24 +386,30 @@ namespace DrawingWithTutorial
             // Process message box results
             switch (result)
             {
+                /*Before canvas will be cleaned program offers to save the existing(Yes)
+                or just cleans canvas without saving(No),
+                option 'cancel' closes message box */
                 case MessageBoxResult.Yes:
                     canvas.Children.Clear();
+                    canvas.Background = new SolidColorBrush(Colors.Transparent);
                     SaveFile();
                     break;
                 case MessageBoxResult.No:
                     canvas.Children.Clear();
+                    canvas.Background = new SolidColorBrush(Colors.Transparent);
                     break;
                 case MessageBoxResult.Cancel:
                     break;
             }
         }
 
-    public void SaveFile()
+        public void SaveFile()
         {
             try
             {
+                //Saves canvas in png format
                 SaveFileDialog sfd = new SaveFileDialog();
-                sfd.Filter = "Png Files(.png)|.png";
+                sfd.Filter = "JPG (*.jpg)|*.jpg|PNG (*.png)|*.png";
 
                 Nullable<bool> result = sfd.ShowDialog();
                 string fileName = "";
@@ -359,13 +429,13 @@ namespace DrawingWithTutorial
                 }
             }
             catch { };
-        
+
         }
         public void OpenFile()
         {
+            //User can open file in png format and continue drawing
             Microsoft.Win32.OpenFileDialog dl1 = new Microsoft.Win32.OpenFileDialog();
-            dl1.DefaultExt = ".png";
-            dl1.Filter = "Image documents (.png)|*.png";
+            dl1.Filter = "JPG (*.jpg)|*.jpg|PNG (*.png)|*.png|All Files (*.*)|*.*";
             Nullable<bool> result = dl1.ShowDialog();
 
             if (result == true)
@@ -379,11 +449,14 @@ namespace DrawingWithTutorial
             canvas.Children.Clear();
         }
 
+        #endregion
+
         public void HighlightShape(object sender)
         {
-            // Selects and Highlights Ellipse when selected
+            //Highlights ellipse and rectangle buttons if they are selected
             if (!isEllipse && !isRectangle)
             {
+                //clears previously set backgrounds
                 ellipse.Background = null;
                 ellipse.BorderBrush = null;
 
@@ -409,16 +482,19 @@ namespace DrawingWithTutorial
                 isRectangle = false;
             }
 
-           
+
         }
+
+
         public void HighlightMenu(object sender)
         {
-            // Highlights Pen if selected. 
+            //Highlights pen button if it is selected
             if (!isHighlighted)
             {
-                // clear previously set backgrounds...
+                //clears previously set backgrounds
                 pencil.Background = null;
                 pencil.BorderBrush = null;
+                
 
                 MenuItem mi = sender as MenuItem;
                 var converter = new System.Windows.Media.BrushConverter();
@@ -437,7 +513,7 @@ namespace DrawingWithTutorial
 
         public void ColorHighlight(object sender)
         {
-            // Highlights whichever color is selected. 
+            //Highlights for color buttons if one of them is selected
             colorBlack.Background = null;
             colorBlack.BorderBrush = null;
             colorGrey.Background = null;
@@ -460,8 +536,9 @@ namespace DrawingWithTutorial
 
         private void tutorial_Click(object sender, RoutedEventArgs e)
         {
+            //Opens new window with tutorial video
             Tutorial objWindow1 = new Tutorial();
-            this.Visibility = Visibility.Hidden; // lai nebūtu atverti divi logi vienlaicīgi
+            this.Visibility = Visibility.Hidden; //Two windows can't be open at the same time
             objWindow1.Show();
         }
 
