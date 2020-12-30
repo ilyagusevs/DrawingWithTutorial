@@ -42,7 +42,7 @@ namespace DrawingWithTutorial
 
         private void Play_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            mePlayer.Source = new Uri(@"C:\Users\Илья\Desktop\Programming\C#\test.mp4", UriKind.Absolute);
+            mePlayer.Source = new Uri(@"C:\Users\Илья\Desktop\Media\Tutorial.mp4", UriKind.Absolute);
             mePlayer.Play();
             mediaPlayerIsPlaying = true;
             mePlayer.Width = 800;

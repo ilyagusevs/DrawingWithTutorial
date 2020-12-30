@@ -33,7 +33,7 @@
             <Button Command="MediaCommands.Play" Content="TUTORIAL" HorizontalAlignment="Right" FontWeight="Bold" />
         </StackPanel>
         
-        <MediaElement Name="mePlayer" Source="Media/test.mp4" Grid.Row="1" LoadedBehavior="Manual" Stretch="Uniform" StretchDirection="DownOnly" />
+        <MediaElement Name="mePlayer" Source="Media/Tutorial.mp4" Grid.Row="1" LoadedBehavior="Manual" Stretch="Uniform" StretchDirection="DownOnly" />
   
         <StatusBar Grid.Row="2">
             <StatusBar.ItemsPanel>
