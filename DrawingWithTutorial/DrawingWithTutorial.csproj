@@ -145,10 +145,11 @@
     <Resource Include="Images\trash.png" />
     <Resource Include="Images\bucket.png" />
     <Resource Include="Images\pencil.png" />
-    <Content Include="Media\test.mp4" />
     <Resource Include="TutorImages\start.png" />
     <Resource Include="TutorImages\backTo.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Media\Tutorial.mp4" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
