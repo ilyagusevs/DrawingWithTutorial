@@ -66,11 +66,13 @@ namespace DrawingWithTutorial
 
         private void Canvas_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            // Draws a line when ellipse or rectangle are not selected
             if (!isEllipse && !isRectangle)
             {
                 if (e.ButtonState == MouseButtonState.Pressed)
                     currentPoint = e.GetPosition(canvas);
             }
+            // Draws an elipse or rectangle when selected with selected strokeColor 
             else
             {
                 if (e.ButtonState == MouseButtonState.Pressed)
@@ -110,7 +112,7 @@ namespace DrawingWithTutorial
 
         void Clear()
         {
-            //Cleans entire canvas
+            // Clears canvas with all drawn lines and background
             canvas.Children.Clear();
             canvas.Background = new SolidColorBrush(Colors.Transparent);
         }
@@ -125,7 +127,7 @@ namespace DrawingWithTutorial
         {
             switch (brushSwitch)
             {
-                //Cases with brush sizes. For each stroke size changes brush size icon 
+                // Cases with brush sizes. For each stroke size changes brush size icon 
                 case 1:
 
                     brushSize.Icon = new System.Windows.Controls.Image
@@ -159,6 +161,7 @@ namespace DrawingWithTutorial
 
         }
 
+        // Cases for background color
         private void fillCanvas()
         {
             switch (fillColor)
@@ -195,7 +198,7 @@ namespace DrawingWithTutorial
 
         #region Colors
 
-        //All color definitions
+        // All color definitions for pencil and for background 
         private void colorBlack_Click(object sender, RoutedEventArgs e)
         {
             ColorHighlight(sender);
@@ -342,7 +345,7 @@ namespace DrawingWithTutorial
 
         public void TogglePen()
         {
-            //Property IsHitTestVisible tells if pen toggle is on(true) or off(false)
+            // Property IsHitTestVisible tells if pen toggle is on(true) or off(false)
 
             if (canvas.IsHitTestVisible == false)
             {
@@ -363,7 +366,7 @@ namespace DrawingWithTutorial
             // Process message box results
             switch (result)
             {
-                /*Before file will be opened program offers to save the existing file(Yes)
+                /* Before file will be opened program offers to save the existing file(Yes)
                 or just open new file without saving(No),
                 option 'cancel' closes message box */
 
@@ -386,9 +389,10 @@ namespace DrawingWithTutorial
             // Process message box results
             switch (result)
             {
-                /*Before canvas will be cleaned program offers to save the existing(Yes)
+                /* Before canvas will be cleaned program offers to save the existing(Yes)
                 or just cleans canvas without saving(No),
                 option 'cancel' closes message box */
+
                 case MessageBoxResult.Yes:
                     canvas.Children.Clear();
                     canvas.Background = new SolidColorBrush(Colors.Transparent);
@@ -407,7 +411,7 @@ namespace DrawingWithTutorial
         {
             try
             {
-                //Saves canvas in png format
+                // Saves canvas in png format
                 SaveFileDialog sfd = new SaveFileDialog();
                 sfd.Filter = "JPG (*.jpg)|*.jpg|PNG (*.png)|*.png";
 
@@ -433,7 +437,7 @@ namespace DrawingWithTutorial
         }
         public void OpenFile()
         {
-            //User can open file in png format and continue drawing
+            // User can open file in png format and continue drawing
             Microsoft.Win32.OpenFileDialog dl1 = new Microsoft.Win32.OpenFileDialog();
             dl1.Filter = "JPG (*.jpg)|*.jpg|PNG (*.png)|*.png|All Files (*.*)|*.*";
             Nullable<bool> result = dl1.ShowDialog();
@@ -453,10 +457,10 @@ namespace DrawingWithTutorial
 
         public void HighlightShape(object sender)
         {
-            //Highlights ellipse and rectangle buttons if they are selected
+            // Highlights ellipse and rectangle buttons if they are selected
             if (!isEllipse && !isRectangle)
             {
-                //clears previously set backgrounds
+                // Clears previously set backgrounds
                 ellipse.Background = null;
                 ellipse.BorderBrush = null;
 
@@ -481,17 +485,14 @@ namespace DrawingWithTutorial
                 rectangle.BorderBrush = null;
                 isRectangle = false;
             }
-
-
         }
-
 
         public void HighlightMenu(object sender)
         {
-            //Highlights pen button if it is selected
+            // Highlights pen button if it is selected
             if (!isHighlighted)
             {
-                //clears previously set backgrounds
+                // Clears previously set backgrounds
                 pencil.Background = null;
                 pencil.BorderBrush = null;
                 
@@ -513,7 +514,7 @@ namespace DrawingWithTutorial
 
         public void ColorHighlight(object sender)
         {
-            //Highlights for color buttons if one of them is selected
+            // Highlights for color buttons if one of them is selected
             colorBlack.Background = null;
             colorBlack.BorderBrush = null;
             colorGrey.Background = null;
@@ -536,9 +537,9 @@ namespace DrawingWithTutorial
 
         private void tutorial_Click(object sender, RoutedEventArgs e)
         {
-            //Opens new window with tutorial video
+            // Opens new window with tutorial video
             Tutorial objWindow1 = new Tutorial();
-            this.Visibility = Visibility.Hidden; //Two windows can't be open at the same time
+            this.Visibility = Visibility.Hidden; // Two windows can't be open at the same time
             objWindow1.Show();
         }
 

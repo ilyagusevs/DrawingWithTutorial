@@ -40,6 +40,7 @@ namespace DrawingWithTutorial
             e.CanExecute = (mePlayer != null) && (mePlayer.Source != null);
         }
 
+        // Plays video tutorial by clickig on "Tutorial" button
         private void Play_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             mePlayer.Source = new Uri(@"C:\Users\Илья\Desktop\Media\Tutorial.mp4", UriKind.Absolute);
@@ -50,12 +51,14 @@ namespace DrawingWithTutorial
 
         }
 
+        // Starts play video
         private void play_Click(object sender, RoutedEventArgs e)
         {
             mePlayer.Play();
             mediaPlayerIsPlaying = true;
         }
 
+        // Pause video tutorial
         private void Pause_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = mediaPlayerIsPlaying;
@@ -72,6 +75,7 @@ namespace DrawingWithTutorial
             e.CanExecute = mediaPlayerIsPlaying;
         }
 
+        // Stops video tutorial
         private void Stop_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             mePlayer.Stop();
@@ -79,6 +83,7 @@ namespace DrawingWithTutorial
         }
 
 
+        // Shortcuts for media player
         private void MediaPlayerProject_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Space)
@@ -96,34 +101,40 @@ namespace DrawingWithTutorial
             }
         }
 
+        // Rewinds backward
         private void fastBckwd_Click(object sender, RoutedEventArgs e)
         {
             mePlayer.Position -= TimeSpan.FromSeconds(5);
             mediaPlayerIsPlaying = false;
         }
 
+        // Rewinds forward
         private void fastFwd_Click(object sender, RoutedEventArgs e)
         {
             mePlayer.Position += TimeSpan.FromSeconds(5);
             mediaPlayerIsPlaying = false;
         }
 
+        // Progress bar for video time
         private void sliderProgress_DragStarted(object sender, DragStartedEventArgs e)
         {
             userIsDraggingSlider = true;
         }
 
+        // Progress bar shows video current position
         private void sliderProgress_DragCompleted(object sender, DragCompletedEventArgs e)
         {
             userIsDraggingSlider = false;
             mePlayer.Position = TimeSpan.FromSeconds(sliderProgress.Value);
         }
 
+        // Progress bar shows video time 
         private void sliderProgress_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             timeUpdate();
         }
 
+        // Changes media player volume on mousewheel
         private void Grid_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             mePlayer.Volume += (e.Delta > 0) ? 0.05 : -0.05;
@@ -135,6 +146,7 @@ namespace DrawingWithTutorial
             timeUpdate();
         }
 
+        // Video time 
         private void timeUpdate()
         {
             if (!reverseTime)
@@ -145,10 +157,11 @@ namespace DrawingWithTutorial
                     - mePlayer.Position.TotalSeconds).ToString(@"hh\:mm\:ss");
         }
 
+        // Changes back to main window with drawing
         private void backTo_Click(object sender, RoutedEventArgs e)
         {
             MainWindow objWindow1 = new MainWindow();
-            this.Visibility = Visibility.Hidden; // lai nebūtu atverti divi logi vienlaicīgi
+            this.Visibility = Visibility.Hidden; // Two windows can't be open at the same time
             objWindow1.Show();
             mePlayer.Stop();
         }
@@ -222,7 +235,7 @@ namespace DrawingWithTutorial
 
         private void CalculateScale()
         {
-            double yScale = ActualHeight / 600f; // galvena loga izmers
+            double yScale = ActualHeight / 600f; // Main windows sizes
             double xScale = ActualWidth / 800f;
             double value = Math.Min(xScale, yScale);
             ScaleValue = (double)OnCoerceScaleValue(tutorialWindow, value);
