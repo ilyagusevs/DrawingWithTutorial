@@ -1,4 +1,7 @@
-﻿using System;
+﻿/* Ilja Gusevs
+   Kristina Yasenovich */
+
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -105,14 +108,12 @@ namespace DrawingWithTutorial
         private void fastBckwd_Click(object sender, RoutedEventArgs e)
         {
             mePlayer.Position -= TimeSpan.FromSeconds(5);
-            mediaPlayerIsPlaying = false;
         }
 
         // Rewinds forward
         private void fastFwd_Click(object sender, RoutedEventArgs e)
         {
             mePlayer.Position += TimeSpan.FromSeconds(5);
-            mediaPlayerIsPlaying = false;
         }
 
         // Progress bar for video time

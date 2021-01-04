@@ -1,4 +1,7 @@
-﻿using Microsoft.Win32;
+﻿/* Ilja Gusevs
+   Kristina Yasenovich */
+
+using Microsoft.Win32;
 using System;
 using System.IO;
 using System.Windows;
@@ -44,8 +47,6 @@ namespace DrawingWithTutorial
             {
                 SaveFile();
             }
-
-           
         }
 
         private void menuNew_Click(object sender, RoutedEventArgs e)
@@ -296,28 +297,28 @@ namespace DrawingWithTutorial
                     canvas.Children.Add(line);
                 }
             }
-            else if (isEllipse)
-            {
-                // If ellipse is selected draws an ellipse on canvas by following a mouse 
-                if (e.LeftButton == MouseButtonState.Pressed)
+                else if (isEllipse)
                 {
+                    // If ellipse is selected draws an ellipse on canvas by following a mouse 
+                    if (e.LeftButton == MouseButtonState.Pressed)
+                    {
 
-                    double minX = Math.Min(e.GetPosition(canvas).X, currentPoint.X);
-                    double minY = Math.Min(e.GetPosition(canvas).Y, currentPoint.Y);
-                    double maxX = Math.Max(e.GetPosition(canvas).X, currentPoint.X);
-                    double maxY = Math.Max(e.GetPosition(canvas).Y, currentPoint.Y);
+                        double minX = Math.Min(e.GetPosition(canvas).X, currentPoint.X);
+                        double minY = Math.Min(e.GetPosition(canvas).Y, currentPoint.Y);
+                        double maxX = Math.Max(e.GetPosition(canvas).X, currentPoint.X);
+                        double maxY = Math.Max(e.GetPosition(canvas).Y, currentPoint.Y);
 
-                    Canvas.SetTop(elip, minY);
-                    Canvas.SetLeft(elip, minX);
+                        Canvas.SetTop(elip, minY);
+                        Canvas.SetLeft(elip, minX);
 
-                    double height = maxY - minY;
-                    double width = maxX - minX;
+                        double height = maxY - minY;
+                        double width = maxX - minX;
 
-                    elip.Height = Math.Abs(height);
-                    elip.Width = Math.Abs(width);
+                        elip.Height = Math.Abs(height);
+                        elip.Width = Math.Abs(width);
+                    }
+
                 }
-
-            }
             else if (isRectangle)
             {
                 // If rectangle is selected draws a rectangle on canvas by following a mouse
@@ -411,7 +412,7 @@ namespace DrawingWithTutorial
         {
             try
             {
-                // Saves canvas in png format
+                // Saves canvas in JPN or PNG format
                 SaveFileDialog sfd = new SaveFileDialog();
                 sfd.Filter = "JPG (*.jpg)|*.jpg|PNG (*.png)|*.png";
 
@@ -438,13 +439,13 @@ namespace DrawingWithTutorial
         public void OpenFile()
         {
             // User can open file in png format and continue drawing
-            Microsoft.Win32.OpenFileDialog dl1 = new Microsoft.Win32.OpenFileDialog();
-            dl1.Filter = "JPG (*.jpg)|*.jpg|PNG (*.png)|*.png|All Files (*.*)|*.*";
-            Nullable<bool> result = dl1.ShowDialog();
+            OpenFileDialog open = new OpenFileDialog();
+            open.Filter = "JPG (*.jpg)|*.jpg|PNG (*.png)|*.png|All Files (*.*)|*.*";
+            Nullable<bool> result = open.ShowDialog();
 
             if (result == true)
             {
-                string filename = dl1.FileName;
+                string filename = open.FileName;
                 ImageBrush brush = new ImageBrush();
                 brush.ImageSource = new BitmapImage(new Uri(@filename, UriKind.Relative));
                 canvas.Background = brush;
